@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>cart Foods</title>
+
+    <style>
+        .card{
+            width:250px;
+            border:1px solid #ddd;
+            border-radius:10px;
+            padding:10px;
+            margin:10px;
+            display:inline-block;
+            text-align:center;
+        }
+
+        img{
+            width:200px;
+            height:150px;
+            object-fit:cover;
+        }
+    </style>
+</head>
+<body>
+
+<h1>cart Foods</h1>
+
+<div id="orders"></div>
+
+<script>
+
+let orders = JSON.parse(localStorage.getItem("orders")) || [];
+
+let container = document.getElementById("orders");
+
+orders.forEach(order => {
+
+    let card = `
+    <div class="card">
+        <img src="${order.image}" alt="${order.name}">
+        <h3>${order.name}</h3>
+        <p>Price: ₹${order.price}</p>
+    </div>
+    `;
+
+    container.innerHTML += card;
+});
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Order Foods</title>
+
+    <style>
+        .card{
+            width:250px;
+            border:1px solid #ddd;
+            border-radius:10px;
+            padding:10px;
+            margin:10px;
+            display:inline-block;
+            text-align:center;
+        }
+
+        img{
+            width:200px;
+            height:150px;
+            object-fit:cover;
+        }
+        
+        button{
+    background:green;
+    color:white;
+    border:none;
+    padding:10px 20px;
+    border-radius:5px;
+    cursor:pointer;
+}
+    </style>
+</head>
+<body>
+
+<h1>🍽 Ordered Foods</h1>
+
+<div id="orders"></div>
+
+<script>
+
+let orders = JSON.parse(localStorage.getItem("orders")) || [];
+
+let container = document.getElementById("orders");
+
+let total = 0;
+
+orders.forEach(order => {
+
+    total += Number(order.price);
+
+    container.innerHTML += `
+        <div class="card">
+            <img src="${order.image}" alt="${order.name}">
+            <h3>${order.name}</h3>
+            <p>Price: ₹${order.price}</p>
+        </div>
+    `;
+});
+
+container.innerHTML += `
+    <hr>
+    <h2>Total Price: ₹${total}</h2>
+
+    <h3>Select Payment Method</h3>
+
+    <input type="radio" name="payment" value="Cash on Delivery" checked>
+    Cash on Delivery<br><br>
+
+    <input type="radio" name="payment" value="UPI">
+    UPI Payment<br><br>
+
+    <button onclick="confirmOrder()">
+        Confirm Order
+    </button>
+`;
+
+function confirmOrder(){
+
+    let payment =
+    document.querySelector('input[name="payment"]:checked').value;
+
+    alert(
+        "🎉 Order Confirmed!\n\n" +
+        "Total Amount: ₹" + total +
+        "\nPayment Method: " + payment
+    );
+
+    localStorage.removeItem("orders");
+}
+
+</script>
+
+
+
+</body>
+</html>
