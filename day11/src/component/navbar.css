@@ -1,0 +1,22 @@
+.navbar {
+  background-color: lightpink;
+  padding: 0;
+}
+
+.nav-links {
+  display: flex;
+  gap: 20px;
+  padding: 10px 20px;
+  background-color: #f0f0f0;
+}
+
+.nav-links a {
+  text-decoration: none;
+  color: #007bff;
+  font-weight: 500;
+  transition: color 0.3s;
+}
+
+.nav-links a:hover {
+  color: #0056b3;
+}
