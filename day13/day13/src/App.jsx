@@ -1,41 +1,28 @@
-import React from 'react'
-import {useState} from 'react'
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom'
+import Navbar from './components/Navbar.jsx'
+import Home from './pages/Home.jsx'
+import StudentForm from './pages/StudentForm.jsx'
+import About from './pages/About.jsx'
+import Contact from './pages/Contact.jsx'
+import './App.css'
 
-const App = () => {
-  const [Name , setName] = useState([])
-  function handlechange(event){
-    setName(event.target.value);
-  }
-  function handlesubmit(event){
-    event.preventDefault();
-    alert(`Hello ${Name}, your form has been submitted successfully!`)
-  }
-
+function App() {
   return (
-
-  <div>
-      
-    <div>
-      <input type="text" placeholder='Enter your name' onChange={handlechange} />
-      <h1>Hello {Name}</h1>
-      <br />
-      <hr />
-      <br />
-    </div >
-
-
-    <div>
-
-      <from onSubmit={handlesubmit}>
-        <input type="text" placeholder='Enter your name' />
-        <input type="email" placeholder='Enter your email' />
-        <input type="password" placeholder='Enter your password' />
-        <button type='submit' onSubmit={handlesubmit}>Submit</button>
-      </from>
-
-    </div>
-  </div>
-    
+    <Router>
+      <div className="app-shell">
+        <Navbar />
+        <main className="page-content">
+          <Routes>
+            <Route path="/" element={<Navigate to="/home" replace />} />
+            <Route path="/home" element={<Home />} />
+            <Route path="/student-form" element={<StudentForm />} />
+            <Route path="/about" element={<About />} />
+            <Route path="/contact" element={<Contact />} />
+            <Route path="*" element={<Navigate to="/home" replace />} />
+          </Routes>
+        </main>
+      </div>
+    </Router>
   )
 }
 
